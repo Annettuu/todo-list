@@ -1,7 +1,7 @@
 <template>
-    <div class="form-task">
-        form task
-    </div>
+  <div class="v-home">
+    home page
+  </div>
 </template>
 
 <script setup>

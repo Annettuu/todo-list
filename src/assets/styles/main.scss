@@ -1,0 +1,32 @@
+@import './colors.scss';
+@import './fonts.scss';
+@import './typography.scss';
+@import './reset.scss';
+
+body {
+  font-family: var(--family);
+  font-style: normal;
+  font-size: 20px;
+  line-height: 16px;
+  background-color: var(--green);
+}
+
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: var(--dark);
+}
+
+nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: var(--green-hover);
+
+    &.router-link-exact-active {
+      color: var(--dark);
+    }
+  }
+}

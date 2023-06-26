@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import VHome from '../pages/v-home.vue'
-import formTask from '../pages/form-task.vue'
+import VHome from '../pages/v-home/v-home.vue'
+import taskEditing from '../pages/task-editing/task-editing.vue'
 
 const routes = [
   {
@@ -9,9 +9,9 @@ const routes = [
     component: VHome
   },
   {
-    path: '/formTask',
-    name: 'formTask',
-    component: formTask
+    path: '/taskEditing',
+    name: 'taskEditing',
+    component: taskEditing
   }
 ]
 

@@ -101,7 +101,7 @@ const saveTask = (id) => {
   const newListTask = listTask.value.map((task) => {
     if (task.id === id && contentTask.value) {
       task.content = contentTask.value;
-      task.edit = false;
+      delete task.edit;
     }
     return task;
   });
@@ -118,11 +118,6 @@ const loadData = () => {
   store.dispatch('loadListTask', listTask.value);
   store.dispatch('loadLastId', lastId.value);
 };
-
-watch(listTask, (newListTask) => {
-  store.dispatch('updateListTask', newListTask);
-  console.debug(1234567)
-});
 
 onMounted(() => {
   loadData();

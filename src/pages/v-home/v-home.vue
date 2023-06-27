@@ -2,11 +2,15 @@
   <div class="v-home">
    <span>Ваши задачи</span>
    <div class="v-home_tasks">
-      <div class="v-home_task" v-for="task of listTask" :key="task.id">
-        {{ task.content }}
-        <button class="v-home_button" @click="doneTask(task.id)">
-          <img src="@/assets/images/svg/btn-done.svg" />
-        </button>
+      <div 
+        class="v-home_task" 
+        v-for="task of listTask" 
+        :key="task.id"
+      >
+        <task-item 
+          :task="task" 
+          @doneTask="doneTask"
+        />
       </div>
    </div>
   </div>
@@ -15,6 +19,7 @@
 <script setup>
 import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
+import taskItem from './components/task-item.vue';
 
 const store = useStore();
 const listTask = computed(() => store.getters.getListTask);

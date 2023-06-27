@@ -50,18 +50,18 @@ const inputTask = ref(null);
 const contentTask = ref('');
 
 const editTask = (id) => {
-  emit('editTask', id, contentTask.value);
+  emit('editTask', id, contentTask);
   nextTick(() => {
     inputTask.value.focus();
   });
 };
 
 const saveTask = (id) => {
-  emit('saveTask', id, contentTask.value);
+  emit('saveTask', id, contentTask);
 };
 
 const deleteTask = (id) => {
-  emit('deleteTask', id, contentTask.value);
+  emit('deleteTask', id);
 };
 </script>
 

@@ -40,20 +40,20 @@ const editTask = (id, contentTask) => {
   listTask.value.forEach(task => {
     if (task.id === id) {
       task.edit = true;
-      contentTask = task.content;
+      contentTask.value = task.content;
     }
   });
 };
 
 const saveTask = (id, contentTask) => {
   const newListTask = listTask.value.map((task) => {
-    if (task.id === id && contentTask) {
-      task.content = contentTask;
+    if (task.id === id && contentTask.value) {
+      task.content = contentTask.value;
       delete task.edit;
     }
     return task;
   });
-  contentTask = '';
+  contentTask.value = '';
   store.dispatch('updateListTask', newListTask);
 };
 

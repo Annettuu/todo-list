@@ -20,13 +20,13 @@
           v-model="contentTask"
           class="item-task_input"
           @focus="$event.target.select()"
-          @blur="deleteMode"
+          @blur="deleteMode(task.id)"
           @keydown.enter="saveTask(task.id), deleteMode"
         >
         <button
-          v-show="task.edit && isShowBtn"
+          v-if="task.edit && isShowBtn"
           class="item-task_save"
-          @click="saveTask(task.id)"
+          @click.stop="saveTask(task.id)"
         >
           <img
             class="item-task_img"
@@ -65,7 +65,7 @@
 <script setup>
 import { defineProps, ref, nextTick } from 'vue';
 
-const emit = defineEmits(['edit-task', 'save-task', 'delete-task']);
+const emit = defineEmits(['edit-task', 'save-task', 'delete-task', 'delete-mode']);
 
 const props = defineProps({
   task: Object
@@ -96,8 +96,8 @@ const deleteTask = (id) => {
   emit('delete-task', id);
 };
 
-const deleteMode = () => {
-  delete props.task.edit;
+const deleteMode = (id) => {
+  emit('delete-mode', id);
 };
 </script>
 
@@ -154,5 +154,6 @@ const deleteMode = () => {
   position: absolute;
   right: 0;
   bottom: 8px;
+  z-index: 10;
 }
 </style>

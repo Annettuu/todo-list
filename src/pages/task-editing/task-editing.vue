@@ -9,9 +9,10 @@
       >
         <item-task
           :task="task"
-          @delete-task="deleteTask"
-          @edit-task="editTask"
-          @save-task="saveTask"
+          @delete-task="onDeleteTask"
+          @edit-task="onEditTask"
+          @save-task="onSaveTask"
+          @delete-mode="onDeleteMode"
         />
       </ul>
     </li>
@@ -35,7 +36,7 @@ const addTask = (newTask) => {
   store.dispatch('updateLastId', lastId.value + 1);
 };
 
-const editTask = (id, contentTask) => {
+const onEditTask = (id, contentTask) => {
   listTask.value.forEach(task => {
     if (task.id === id) {
       task.edit = true;
@@ -44,7 +45,7 @@ const editTask = (id, contentTask) => {
   });
 };
 
-const saveTask = (id, contentTask) => {
+const onSaveTask = (id, contentTask) => {
   const newListTask = listTask.value.map((task) => {
     if (task.id === id && contentTask.value) {
       task.content = contentTask.value;
@@ -57,9 +58,17 @@ const saveTask = (id, contentTask) => {
   store.dispatch('updateListTask', newListTask);
 };
 
-const deleteTask = (id) => {
+const onDeleteTask = (id) => {
   const newListTask = listTask.value.filter((item) => item.id !== id);
   store.dispatch('updateListTask', newListTask);
+};
+
+const onDeleteMode = (id) => {
+  listTask.value.forEach(task => {
+    if (task.id === id) {
+      delete task.edit;
+    }
+  });
 };
 
 const loadData = () => {

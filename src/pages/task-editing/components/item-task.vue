@@ -88,8 +88,11 @@ const editTask = (id) => {
 };
 
 const saveTask = (id) => {
-  console.debug(899898);
-  emit('save-task', id, contentTask);
+  if (contentTask.value) {
+    emit('save-task', id, contentTask);
+  } else {
+    deleteTask(id);
+  }
 };
 
 const deleteTask = (id) => {
@@ -97,8 +100,11 @@ const deleteTask = (id) => {
 };
 
 const deleteMode = (id) => {
-  emit('delete-mode', id);
+  setTimeout(() => {
+    emit('delete-mode', id);
+  }, 500);
 };
+
 </script>
 
 <style lang="scss">

@@ -1,6 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import VHome from '../pages/v-home/v-home.vue'
-import taskEditing from '../pages/task-editing/task-editing.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import VHome from '../pages/v-home/v-home.vue';
+import taskEditing from '../pages/task-editing/task-editing.vue';
 
 const routes = [
   {
@@ -13,11 +13,11 @@ const routes = [
     name: 'taskEditing',
     component: taskEditing
   }
-]
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
+});
 
-export default router
+export default router;

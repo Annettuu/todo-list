@@ -1,19 +1,19 @@
 <template>
   <nav>
-    <router-link 
-      @dragstart.prevent 
+    <router-link
       to="/"
+      @dragstart.prevent
     >
       {{ linkTextHome }}
     </router-link> |
-    <router-link 
-      @dragstart.prevent 
+    <router-link
       to="/taskEditing"
+      @dragstart.prevent
     >
       {{ linkTextEdit }}
     </router-link>
   </nav>
-  <router-view/>
+  <router-view />
 </template>
 
 <script setup>
@@ -27,14 +27,14 @@ let linkTextHome = ref('');
 watch(route,
   () => {
     if (route.path === '/taskEditing') {
-      linkTextEdit = 'Редактирование задач'
-      linkTextHome = 'Вернуться на главную'
+      linkTextEdit.value = 'Редактирование задач';
+      linkTextHome.value = 'Вернуться на главную';
     } else if (route.path === '/') {
-      linkTextEdit = 'Изменить задачи'
-      linkTextHome = 'Список задач'
+      linkTextEdit.value = 'Изменить задачи';
+      linkTextHome.value = 'Список задач';
     }
   }
-)
+);
 </script>
 
 <style lang="scss">

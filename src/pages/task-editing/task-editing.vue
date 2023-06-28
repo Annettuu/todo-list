@@ -1,17 +1,17 @@
 <template>
   <div class="task-editing">
-    <task-input @addTask="addTask" />
+    <task-input @add-task="addTask" />
     <li class="task-editing_tasks">
       <ul
         v-for="task of listTask"
         :key="task.id"
         class="task-editing_task"
       >
-        <task-item 
-          @deleteTask="deleteTask" 
-          @editTask="editTask" 
-          @saveTask="saveTask" 
+        <item-task
           :task="task"
+          @delete-task="deleteTask"
+          @edit-task="editTask"
+          @save-task="saveTask"
         />
       </ul>
     </li>
@@ -22,7 +22,7 @@
 import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import taskInput from './components/input-task.vue';
-import taskItem from './components/task-item.vue';
+import itemTask from './components/item-task.vue';
 
 const store = useStore();
 const listTask = computed(() => store.getters.getListTask);
@@ -33,7 +33,6 @@ const addTask = (newTask) => {
   const newListTask = [...listTask.value, { id: lastId.value, content: newTask }];
   store.dispatch('updateListTask', newListTask);
   store.dispatch('updateLastId', lastId.value + 1);
-
 };
 
 const editTask = (id, contentTask) => {
@@ -51,6 +50,7 @@ const saveTask = (id, contentTask) => {
       task.content = contentTask.value;
       delete task.edit;
     }
+
     return task;
   });
   contentTask.value = '';
@@ -78,5 +78,17 @@ onMounted(() => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  &_tasks {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    list-style-type: none;
+  }
+  &_task {
+    display: flex;
+    justify-content: center;
+  }
 }
 </style>

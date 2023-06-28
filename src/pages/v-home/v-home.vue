@@ -1,18 +1,17 @@
 <template>
   <div class="v-home">
-   <span>Ваши задачи</span>
-   <div class="v-home_tasks">
-      <div 
-        class="v-home_task" 
-        v-for="task of listTask" 
+    <div class="v-home_tasks">
+      <div
+        v-for="task of listTask"
         :key="task.id"
+        class="v-home_task"
       >
-        <task-item 
-          :task="task" 
-          @doneTask="doneTask"
+        <task-item
+          :task="task"
+          @done-task="doneTask"
         />
       </div>
-   </div>
+    </div>
   </div>
 </template>
 
@@ -29,6 +28,7 @@ const doneTask = (id) => {
     if (task.id === id) {
       task.done = !task.done;
     }
+
     return task;
   });
   store.dispatch('updateListTask', newListTask);
@@ -48,12 +48,16 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-bottom: 30px;
 
   &_tasks {
     display: flex;
     flex-direction: column;
     gap: 25px;
   }
+  &_task {
+    justify-content: center;
+    display: flex;
+  }
 }
-
 </style>

@@ -40,5 +40,5 @@ export const listTask = {
         commit('setLastId', JSON.parse(savedLastId));
       }
     }
-  },
+  }
 };

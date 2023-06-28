@@ -1,5 +1,9 @@
 <template>
   <div class="v-home">
+    <vZaglushka
+      v-if="!listTask.length"
+      :is-first-visit="isFirstVisit"
+    />
     <div class="v-home_tasks">
       <div
         v-for="task of listTask"
@@ -16,12 +20,14 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
 import taskItem from './components/task-item.vue';
+import vZaglushka from './components/v-zaglushka.vue';
 
 const store = useStore();
 const listTask = computed(() => store.getters.getListTask);
+const isFirstVisit = ref(false);
 
 const doneTask = (id) => {
   const newListTask = listTask.value.map(task => {
@@ -40,7 +46,16 @@ const loadData = () => {
 
 onMounted(() => {
   loadData();
+  watchVisited();
 });
+
+const watchVisited = () => {
+  const visitedBefore = localStorage.getItem('visitedBefore');
+  if (!visitedBefore) {
+    isFirstVisit.value = true;
+    localStorage.setItem('visitedBefore', 'true');
+  }
+};
 </script>
 
 <style lang="scss">

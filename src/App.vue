@@ -28,7 +28,7 @@ watch(route,
   () => {
     if (route.path === '/taskEditing') {
       linkTextEdit.value = 'Редактирование задач';
-      linkTextHome.value = 'Вернуться на главную';
+      linkTextHome.value = 'Вернуться к списку';
     } else if (route.path === '/') {
       linkTextEdit.value = 'Изменить задачи';
       linkTextHome.value = 'Список задач';

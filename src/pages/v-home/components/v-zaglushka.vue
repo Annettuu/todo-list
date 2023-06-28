@@ -15,7 +15,6 @@ const props = defineProps({
 const text = computed(() => {
   return props.isFirstVisit ? 'Чтобы начать, просто перейдите на страницу редактирования задач!' : 'Пока список задач пуст...';
 });
-
 </script>
 
 <style lang="scss">

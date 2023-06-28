@@ -104,7 +104,6 @@ const deleteMode = (id) => {
     emit('delete-mode', id);
   }, 500);
 };
-
 </script>
 
 <style lang="scss">
@@ -118,48 +117,44 @@ const deleteMode = (id) => {
       filter: brightness(0.9);
     }
   }
-}
-.item-task_input {
-  border: none;
-  font-size: 20px;
-  width: 90%;
-  &:focus-visible {
-    outline: none;
+  &_input {
+    border: none;
+    font-size: 20px;
+    width: 90%;
+    &:focus-visible {
+      outline: none;
+    }
   }
-}
-
-.item-task_label {
-  display: flex;
-  border: 1px solid;
-  justify-content: center;
-  padding: 10px;
-  border-radius: 8px;
-  width: 600px;
-  background-color: var(--white);
-}
-.__doneTask {
-  border: 2px solid var(--green);
-  &:hover {
-    background-color: var(--green-hover);
+  &_label {
+    display: flex;
+    border: 1px solid;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 8px;
+    width: 600px;
+    background-color: var(--white);
+    &.__doneTask {
+      border: 2px solid var(--green);
+    }
   }
-}
-.item-task_status {
-  color: var(--green);
-  position: absolute;
-  left: -124px;
-}
-.item-task_buttons {
-  display: flex;
-  align-items: center;
-}
-.item-task_edit {
-  position: absolute;
-  right: -28px;
-}
-.item-task_save {
-  position: absolute;
-  right: 0;
-  bottom: 8px;
-  z-index: 10;
+  &_status {
+    color: var(--green);
+    position: absolute;
+    left: -124px;
+  }
+  &_buttons {
+    display: flex;
+    align-items: center;
+  }
+  &_edit {
+    position: absolute;
+    right: -28px;
+  }
+  &_save {
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+    z-index: 10;
+  }
 }
 </style>

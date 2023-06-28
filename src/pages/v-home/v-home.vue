@@ -64,7 +64,6 @@ const watchVisited = () => {
   flex-direction: column;
   gap: 15px;
   margin-bottom: 30px;
-
   &_tasks {
     display: flex;
     flex-direction: column;

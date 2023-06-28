@@ -29,7 +29,6 @@ const store = useStore();
 const listTask = computed(() => store.getters.getListTask);
 const lastId = computed(() => store.getters.getLastId);
 
-
 const addTask = (newTask) => {
   const newListTask = [{ id: lastId.value, content: newTask }, ...listTask.value];
   store.dispatch('updateListTask', newListTask);

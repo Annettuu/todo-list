@@ -30,7 +30,7 @@ const lastId = computed(() => store.getters.getLastId);
 
 
 const addTask = (newTask) => {
-  const newListTask = [...listTask.value, { id: lastId.value, content: newTask }];
+  const newListTask = [{ id: lastId.value, content: newTask }, ...listTask.value];
   store.dispatch('updateListTask', newListTask);
   store.dispatch('updateLastId', lastId.value + 1);
 };

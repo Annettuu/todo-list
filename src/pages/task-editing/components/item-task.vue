@@ -4,7 +4,16 @@
     @mouseleave="showBtn(false)"
     @mouseenter="showBtn(true)"
   >
-    <label class="item-task_label">
+    <div
+      v-if="task.done"
+      class="item-task_status"
+    >
+      Завершено
+    </div>
+    <label
+      class="item-task_label"
+      :class="{'__doneTask': task.done}"
+    >
       <template v-if="props.task.edit">
         <input
           ref="inputTask"
@@ -100,7 +109,7 @@ const deleteMode = () => {
   cursor: pointer;
   &:hover {
     .item-task_label {
-      filter: brightness(0.8);
+      filter: brightness(0.9);
     }
   }
 }
@@ -121,6 +130,17 @@ const deleteMode = () => {
   border-radius: 8px;
   width: 600px;
   background-color: var(--white);
+}
+.__doneTask {
+  border: 2px solid var(--green);
+  &:hover {
+    background-color: var(--green-hover);
+  }
+}
+.item-task_status {
+  color: var(--green);
+  position: absolute;
+  left: -124px;
 }
 .item-task_buttons {
   display: flex;

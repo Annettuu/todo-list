@@ -12,7 +12,9 @@
       @click="doneTask(props.task.id)"
     >
       <img
+        v-svg-inline
         src="@/assets/images/svg/btn-done.svg"
+        :class="svg"
       >
     </button>
   </div>
@@ -65,6 +67,9 @@ const doneTask = (id) => {
       &:hover {
         background-color: var(--green-hover);
       }
+    }
+    svg > path {
+      fill: var(--green);
     }
   }
 }

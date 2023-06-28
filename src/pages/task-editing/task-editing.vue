@@ -86,6 +86,7 @@ onMounted(() => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 30px;
   &_tasks {
     display: flex;
     justify-content: center;

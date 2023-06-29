@@ -146,9 +146,17 @@ const deleteMode = (id) => {
     display: flex;
     align-items: center;
   }
+  &_delete {
+    &:hover {
+      filter: brightness(0.7);
+    }
+  }
   &_edit {
     position: absolute;
     right: -28px;
+    &:hover {
+      filter: brightness(0.7);
+    }
   }
   &_save {
     position: absolute;

@@ -72,5 +72,8 @@ const doneTask = (id) => {
       fill: var(--green);
     }
   }
+  svg {
+    outline: none;
+  }
 }
 </style>

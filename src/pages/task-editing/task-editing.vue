@@ -7,7 +7,7 @@
         :key="task.id"
         class="task-editing_task"
       >
-        <item-task
+        <v-task
           :task="task"
           @delete-task="onDeleteTask"
           @edit-task="onEditTask"
@@ -23,7 +23,7 @@
 import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import taskInput from './components/input-task.vue';
-import itemTask from './components/item-task.vue';
+import VTask from './components/v-task.vue';
 
 const store = useStore();
 const listTask = computed(() => store.getters.getListTask);

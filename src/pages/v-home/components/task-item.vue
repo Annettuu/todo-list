@@ -46,6 +46,7 @@ const doneTask = (id) => {
     background-color: var(--white);
     color: var(--gray);
     padding: 10px;
+    margin: 1px;
     border-radius: 8px;
     min-width: 750px;
     display: flex;
@@ -63,6 +64,7 @@ const doneTask = (id) => {
     .task-item_content {
       border: 2px solid var(--green);
       color: var(--green);
+      margin: 0;
 
       &:hover {
         background-color: var(--green-hover);

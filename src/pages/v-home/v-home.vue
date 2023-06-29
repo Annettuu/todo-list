@@ -1,6 +1,6 @@
 <template>
   <div class="v-home">
-    <vZaglushka
+    <v-empty
       v-if="!listTask.length"
       :is-first-visit="isFirstVisit"
     />
@@ -23,7 +23,7 @@
 import { computed, onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
 import taskItem from './components/task-item.vue';
-import vZaglushka from './components/v-zaglushka.vue';
+import vEmpty from './components/v-empty..vue';
 
 const store = useStore();
 const listTask = computed(() => store.getters.getListTask);

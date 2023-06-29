@@ -1,6 +1,6 @@
 <template>
-  <div class="v-zaglushka">
-    <span class="v-zaglushka_text">
+  <div class="v-plug">
+    <span class="v-plug_text">
       {{ text }}
     </span>
   </div>
@@ -18,7 +18,7 @@ const text = computed(() => {
 </script>
 
 <style lang="scss">
-.v-zaglushka {
+.v-plug {
   display: flex;
   align-items: center;
   justify-content: center;

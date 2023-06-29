@@ -1,60 +1,60 @@
 <template>
   <div
-    class="item-task"
+    class="v-task"
     @mouseleave="showBtn(false)"
     @mouseenter="showBtn(true)"
   >
     <div
       v-if="task.done"
-      class="item-task_status"
+      class="v-task_status"
     >
       Завершено
     </div>
     <label
-      class="item-task_label"
+      class="v-task_label"
       :class="{'__doneTask': task.done}"
     >
       <template v-if="props.task.edit">
         <input
           ref="inputTask"
           v-model="contentTask"
-          class="item-task_input"
+          class="v-task_input"
           @focus="$event.target.select()"
           @blur="deleteMode(task.id)"
           @keydown.enter="saveTask(task.id), deleteMode"
         >
         <button
           v-if="task.edit && isShowBtn"
-          class="item-task_save"
+          class="v-task_save"
           @click.stop="saveTask(task.id)"
         >
           <img
-            class="item-task_img"
+            class="v-task_img"
             src="@/assets/images/svg/btn-move.svg"
           >
         </button>
       </template>
       <template v-else>
-        <span class="item-task_content"> {{ task.content }} </span>
+        <span class="v-task_content"> {{ task.content }} </span>
       </template>
     </label>
-    <div class="item-task_buttons">
+    <div class="v-task_buttons">
       <button
-        class="item-task_delete"
+        class="v-task_delete"
         @click="deleteTask(task.id)"
       >
         <img
-          class="item-task_img"
+          class="v-task_img"
           src="@/assets/images/svg/btn-delete.svg"
         >
       </button>
       <button
         v-if="isShowBtn"
-        class="item-task_edit"
+        class="v-task_edit"
         @click="editTask(task.id)"
       >
         <img
-          class="item-task_img"
+          class="v-task_img"
           src="@/assets/images/svg/btn-edit.svg"
         >
       </button>
@@ -107,13 +107,13 @@ const deleteMode = (id) => {
 </script>
 
 <style lang="scss">
-.item-task {
+.v-task {
   display: flex;
   align-items: center;
   position: relative;
   cursor: pointer;
   &:hover {
-    .item-task_label {
+    .v-task_label {
       filter: brightness(0.9);
     }
   }

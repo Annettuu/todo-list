@@ -1,12 +1,12 @@
 <template>
   <div class="v-home">
     <v-empty
-      v-if="!listTask.length"
+      v-if="!tasks.length"
       :is-first-visit="isFirstVisit"
     />
-    <div class="v-home_tasks">
-      <div
-        v-for="task of listTask"
+    <ul class="v-home_tasks">
+      <li
+        v-for="task of tasks"
         :key="task.id"
         class="v-home_task"
       >
@@ -14,8 +14,8 @@
           :task="task"
           @done-task="doneTask"
         />
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -23,25 +23,24 @@
 import { computed, onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
 import taskItem from './components/task-item.vue';
-import vEmpty from './components/v-empty..vue';
+import vEmpty from './components/v-empty.vue';
 
 const store = useStore();
-const listTask = computed(() => store.getters.getListTask);
+const tasks = computed(() => store.getters.getListTask);
 const isFirstVisit = ref(false);
 
 const doneTask = (id) => {
-  const newListTask = listTask.value.map(task => {
+  for (let i = 0; i < tasks.value.length; i++) {
+    const task = tasks.value[i];
     if (task.id === id) {
       task.done = !task.done;
     }
-
-    return task;
-  });
-  store.dispatch('updateListTask', newListTask);
+  }
+  store.dispatch('updateListTask', tasks.value);
 };
 
 const loadData = () => {
-  store.dispatch('loadListTask', listTask.value);
+  store.dispatch('loadListTask', tasks.value);
 };
 
 onMounted(() => {

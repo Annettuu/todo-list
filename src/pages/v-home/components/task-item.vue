@@ -6,7 +6,9 @@
     <span
       class="task-item_content"
       @click="doneTask(props.task.id)"
-    >{{ props.task.content }}</span>
+    >
+      {{ props.task.content }}
+    </span>
     <button
       class="task-item_button"
       @click="doneTask(props.task.id)"

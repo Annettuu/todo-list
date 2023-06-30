@@ -20,13 +20,13 @@
           v-model="contentTask"
           class="v-task_input"
           @focus="$event.target.select()"
-          @blur="deleteMode(task.id)"
-          @keydown.enter="saveTask(task.id), deleteMode"
+          @blur="toggleMode"
+          @keydown.enter="saveTask"
         >
         <button
           v-if="task.edit && isShowBtn"
           class="v-task_save"
-          @click.stop="saveTask(task.id)"
+          @click.stop="saveTask"
         >
           <img
             class="v-task_img"
@@ -41,7 +41,7 @@
     <div class="v-task_buttons">
       <button
         class="v-task_delete"
-        @click="deleteTask(task.id)"
+        @click="deleteTask"
       >
         <img
           class="v-task_img"
@@ -51,7 +51,7 @@
       <button
         v-if="isShowBtn"
         class="v-task_edit"
-        @click="editTask(task.id)"
+        @click="editTask"
       >
         <img
           class="v-task_img"
@@ -65,7 +65,7 @@
 <script setup>
 import { defineProps, ref, nextTick } from 'vue';
 
-const emit = defineEmits(['edit-task', 'save-task', 'delete-task', 'delete-mode']);
+const emit = defineEmits(['edit-task', 'save-task', 'delete-task', 'toggle-mode']);
 
 const props = defineProps({
   task: Object
@@ -79,29 +79,30 @@ const showBtn = (is) => {
   isShowBtn.value = is;
 };
 
-const editTask = (id) => {
-  emit('edit-task', id, contentTask);
+const editTask = () => {
+  emit('edit-task', props.task.id, contentTask);
 
   nextTick(() => {
     inputTask.value.focus();
   });
 };
 
-const saveTask = (id) => {
+const saveTask = () => {
   if (contentTask.value) {
-    emit('save-task', id, contentTask);
+    emit('save-task', props.task.id, contentTask);
   } else {
-    deleteTask(id);
+    deleteTask();
   }
+  toggleMode();
 };
 
-const deleteTask = (id) => {
-  emit('delete-task', id);
+const deleteTask = () => {
+  emit('delete-task', props.task.id);
 };
 
-const deleteMode = (id) => {
+const toggleMode = () => {
   setTimeout(() => {
-    emit('delete-mode', id);
+    emit('toggle-mode', props.task.id);
   }, 500);
 };
 </script>
@@ -147,6 +148,7 @@ const deleteMode = (id) => {
     align-items: center;
   }
   &_delete {
+    cursor: pointer;
     &:hover {
       filter: brightness(0.7);
     }
@@ -154,6 +156,7 @@ const deleteMode = (id) => {
   &_edit {
     position: absolute;
     right: -28px;
+    cursor: pointer;
     &:hover {
       filter: brightness(0.7);
     }
@@ -163,6 +166,7 @@ const deleteMode = (id) => {
     right: 0;
     bottom: 8px;
     z-index: 10;
+    cursor: pointer;
   }
 }
 </style>

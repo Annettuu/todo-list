@@ -1,9 +1,9 @@
 <template>
   <div class="task-editing">
     <task-input @add-task="addTask" />
-    <li class="task-editing_tasks">
-      <ul
-        v-for="task of listTask"
+    <ul class="task-editing_tasks">
+      <li
+        v-for="task of tasks"
         :key="task.id"
         class="task-editing_task"
       >
@@ -12,10 +12,10 @@
           @delete-task="onDeleteTask"
           @edit-task="onEditTask"
           @save-task="onSaveTask"
-          @delete-mode="onDeleteMode"
+          @toggle-mode="onToggleMode"
         />
-      </ul>
-    </li>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -26,52 +26,52 @@ import taskInput from './components/input-task.vue';
 import VTask from './components/v-task.vue';
 
 const store = useStore();
-const listTask = computed(() => store.getters.getListTask);
+const tasks= computed(() => store.getters.getListTask);
 const lastId = computed(() => store.getters.getLastId);
 
-const addTask = (newTask) => {
-  const newListTask = [{ id: lastId.value, content: newTask }, ...listTask.value];
+const addTask = (content) => {
+  const newListTask = [{ id: lastId.value, content: content }, ...tasks.value];
   store.dispatch('updateListTask', newListTask);
   store.dispatch('updateLastId', lastId.value + 1);
 };
 
-const onEditTask = (id, contentTask) => {
-  listTask.value.forEach(task => {
+const onEditTask = (id, content) => {
+  tasks.value.forEach(task => {
     if (task.id === id) {
       task.edit = true;
-      contentTask.value = task.content;
+      content.value = task.content;
     }
   });
 };
 
-const onSaveTask = (id, contentTask) => {
-  const newListTask = listTask.value.map((task) => {
-    if (task.id === id && contentTask.value) {
-      task.content = contentTask.value;
-      delete task.edit;
+const onSaveTask = (id, content) => {
+  for (let i = 0; i < tasks.value.length; i++) {
+    const task = tasks.value[i];
+    if (task.id === id && content.value) {
+      task.content = content.value;
+      task.edit = false;
     }
-
-    return task;
-  });
-  contentTask.value = '';
-  store.dispatch('updateListTask', newListTask);
+  }
+  content.value = '';
+  store.dispatch('updateListTask', tasks.value);
 };
 
 const onDeleteTask = (id) => {
-  const newListTask = listTask.value.filter((item) => item.id !== id);
-  store.dispatch('updateListTask', newListTask);
+  const index = tasks.value.findIndex((item) => item.id === id);
+  tasks.value.splice(index, 1);
+  store.dispatch('updateListTask', tasks.value);
 };
 
-const onDeleteMode = (id) => {
-  listTask.value.forEach(task => {
+const onToggleMode = (id) => {
+  tasks.value.forEach(task => {
     if (task.id === id) {
-      delete task.edit;
+      task.edit = false;
     }
   });
 };
 
 const loadData = () => {
-  store.dispatch('loadListTask', listTask.value);
+  store.dispatch('loadListTask', tasks.value);
   store.dispatch('loadLastId', lastId.value);
 };
 

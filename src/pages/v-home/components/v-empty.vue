@@ -1,6 +1,6 @@
 <template>
-  <div class="v-plug">
-    <span class="v-plug_text">
+  <div class="v-empty">
+    <span class="v-empty">
       {{ text }}
     </span>
   </div>
@@ -18,7 +18,7 @@ const text = computed(() => {
 </script>
 
 <style lang="scss">
-.v-plug {
+.v-empty {
   display: flex;
   align-items: center;
   justify-content: center;
